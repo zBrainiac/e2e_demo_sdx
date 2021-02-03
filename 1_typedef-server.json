@@ -59,7 +59,9 @@
   ],
   "entityDefs": [
     {
-      "superTypes": ["Infrastructure"],
+      "superTypes": [
+        "Infrastructure"
+      ],
       "serviceType": "3party",
       "category": "ENTITY",
       "name": "server",

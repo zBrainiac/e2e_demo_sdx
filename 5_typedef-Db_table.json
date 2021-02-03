@@ -1,0 +1,223 @@
+{
+  "entityDefs": [
+    {
+      "category": "ENTITY",
+      "serviceType": "3party",
+      "name": "db_table",
+      "description": "db_table",
+      "typeVersion": "1.5",
+      "options": {
+        "schemaElementsAttribute": "columns"
+      },
+      "attributeDefs": [
+        {
+          "name": "createTime",
+          "typeName": "date",
+          "isOptional": true,
+          "cardinality": "SINGLE",
+          "valuesMinCount": 0,
+          "valuesMaxCount": 1,
+          "isUnique": false,
+          "isIndexable": false,
+          "includeInNotification": false,
+          "searchWeight": -1
+        },
+        {
+          "name": "lastAccessTime",
+          "typeName": "date",
+          "isOptional": true,
+          "cardinality": "SINGLE",
+          "valuesMinCount": 0,
+          "valuesMaxCount": 1,
+          "isUnique": false,
+          "isIndexable": false,
+          "includeInNotification": false,
+          "searchWeight": -1
+        }
+      ],
+      "superTypes": [
+        "DataSet"
+      ],
+      "subTypes": [
+      ],
+      "relationshipAttributeDefs": [
+        {
+          "name": "inputToProcesses",
+          "typeName": "array<Process>",
+          "isOptional": true,
+          "cardinality": "SET",
+          "valuesMinCount": -1,
+          "valuesMaxCount": -1,
+          "isUnique": false,
+          "isIndexable": false,
+          "includeInNotification": false,
+          "searchWeight": -1,
+          "relationshipTypeName": "dataset_process_inputs",
+          "isLegacyAttribute": false
+        },
+        {
+          "name": "pipeline",
+          "typeName": "spark_ml_pipeline",
+          "isOptional": true,
+          "cardinality": "SINGLE",
+          "valuesMinCount": -1,
+          "valuesMaxCount": -1,
+          "isUnique": false,
+          "isIndexable": false,
+          "includeInNotification": false,
+          "searchWeight": -1,
+          "relationshipTypeName": "spark_ml_pipeline_dataset",
+          "isLegacyAttribute": false
+        },
+        {
+          "name": "schema",
+          "typeName": "array<avro_schema>",
+          "isOptional": true,
+          "cardinality": "SET",
+          "valuesMinCount": -1,
+          "valuesMaxCount": -1,
+          "isUnique": false,
+          "isIndexable": false,
+          "includeInNotification": false,
+          "searchWeight": -1,
+          "relationshipTypeName": "avro_schema_associatedEntities",
+          "isLegacyAttribute": false
+        },
+        {
+          "name": "sd",
+          "typeName": "db_storagedesc",
+          "isOptional": true,
+          "cardinality": "SINGLE",
+          "valuesMinCount": -1,
+          "valuesMaxCount": -1,
+          "isUnique": false,
+          "isIndexable": false,
+          "includeInNotification": false,
+          "searchWeight": -1,
+          "constraints": [
+            {
+              "type": "ownedRef"
+            }
+          ],
+          "relationshipTypeName": "db_table_storagedesc",
+          "isLegacyAttribute": true
+        },
+        {
+          "name": "ddlQueries",
+          "typeName": "array<db_table_ddl>",
+          "isOptional": true,
+          "cardinality": "SET",
+          "valuesMinCount": -1,
+          "valuesMaxCount": -1,
+          "isUnique": false,
+          "isIndexable": false,
+          "includeInNotification": false,
+          "searchWeight": -1,
+          "constraints": [
+            {
+              "type": "ownedRef"
+            }
+          ],
+          "relationshipTypeName": "db_table_ddl_queries",
+          "isLegacyAttribute": false
+        },
+        {
+          "name": "columns",
+          "typeName": "array<db_column>",
+          "isOptional": true,
+          "cardinality": "SET",
+          "valuesMinCount": -1,
+          "valuesMaxCount": -1,
+          "isUnique": false,
+          "isIndexable": false,
+          "includeInNotification": false,
+          "searchWeight": -1,
+          "constraints": [
+            {
+              "type": "ownedRef"
+            }
+          ],
+          "relationshipTypeName": "db_table_columns",
+          "isLegacyAttribute": true
+        },
+        {
+          "name": "model",
+          "typeName": "spark_ml_model",
+          "isOptional": true,
+          "cardinality": "SINGLE",
+          "valuesMinCount": -1,
+          "valuesMaxCount": -1,
+          "isUnique": false,
+          "isIndexable": false,
+          "includeInNotification": false,
+          "searchWeight": -1,
+          "relationshipTypeName": "spark_ml_model_dataset",
+          "isLegacyAttribute": false
+        },
+        {
+          "name": "partitionKeys",
+          "typeName": "array<db_column>",
+          "isOptional": true,
+          "cardinality": "SET",
+          "valuesMinCount": -1,
+          "valuesMaxCount": -1,
+          "isUnique": false,
+          "isIndexable": false,
+          "includeInNotification": false,
+          "searchWeight": -1,
+          "constraints": [
+            {
+              "type": "ownedRef"
+            }
+          ],
+          "relationshipTypeName": "db_table_partitionkeys",
+          "isLegacyAttribute": true
+        },
+        {
+          "name": "meanings",
+          "typeName": "array<AtlasGlossaryTerm>",
+          "isOptional": true,
+          "cardinality": "SET",
+          "valuesMinCount": -1,
+          "valuesMaxCount": -1,
+          "isUnique": false,
+          "isIndexable": false,
+          "includeInNotification": false,
+          "searchWeight": -1,
+          "relationshipTypeName": "AtlasGlossarySemanticAssignment",
+          "isLegacyAttribute": false
+        },
+        {
+          "name": "db",
+          "typeName": "db_db",
+          "isOptional": true,
+          "cardinality": "SINGLE",
+          "valuesMinCount": -1,
+          "valuesMaxCount": -1,
+          "isUnique": false,
+          "isIndexable": false,
+          "includeInNotification": false,
+          "searchWeight": -1,
+          "relationshipTypeName": "db_table_db",
+          "isLegacyAttribute": true
+        },
+        {
+          "name": "outputFromProcesses",
+          "typeName": "array<Process>",
+          "isOptional": true,
+          "cardinality": "SET",
+          "valuesMinCount": -1,
+          "valuesMaxCount": -1,
+          "isUnique": false,
+          "isIndexable": false,
+          "includeInNotification": false,
+          "searchWeight": -1,
+          "relationshipTypeName": "process_dataset_outputs",
+          "isLegacyAttribute": false
+        }
+      ],
+      "businessAttributeDefs": {
+      }
+    }
+  ]
+}

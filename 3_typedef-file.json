@@ -75,7 +75,9 @@
   ],
   "entityDefs": [
     {
-      "superTypes": ["DataSet"],
+      "superTypes": [
+        "DataSet"
+      ],
       "serviceType": "3party",
       "category": "ENTITY",
       "name": "dataset",

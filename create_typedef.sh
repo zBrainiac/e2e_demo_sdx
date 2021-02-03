@@ -12,5 +12,5 @@ $(${ATLAS} ${ATLAS_HEADER} ${ATLAS_ENDPOINT}/types/typedefs -d '@./1_typedef-ser
 $(${ATLAS} ${ATLAS_HEADER} ${ATLAS_ENDPOINT}/types/typedefs -d '@./2_typedef-etl_process.json')
 $(${ATLAS} ${ATLAS_HEADER} ${ATLAS_ENDPOINT}/types/typedefs -d '@./3_typedef-file.json')
 $(${ATLAS} ${ATLAS_HEADER} ${ATLAS_ENDPOINT}/types/typedefs -d '@./4_typedef-transfer_process.json')
-$(${ATLAS} ${ATLAS_HEADER} ${ATLAS_ENDPOINT}/types/typedefs -d '@./5_typedef-Db2_table.json')
+$(${ATLAS} ${ATLAS_HEADER} ${ATLAS_ENDPOINT}/types/typedefs -d '@./5_typedef-Db_table.json')
 $(${ATLAS} ${ATLAS_HEADER} ${ATLAS_ENDPOINT}/types/typedefs -d '@./6_typedef-pet.json')

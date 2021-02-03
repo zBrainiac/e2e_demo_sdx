@@ -4,6 +4,7 @@
 
 # Default local IP
 SERVER_IP=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
+
 HOST_NAME=$(hostname)
 ENV="dev"
 CLASS="worker_node"
@@ -25,7 +26,7 @@ while [ "$1" != "" ]; do
     shift
     ENV="$1"
     ;;
-  -h| --host_name)
+  -h | --host_name)
     shift
     HOST_NAME="$1"
     ;;
@@ -57,7 +58,7 @@ ATLAS="curl -u ${ATLAS_USER}:${ATLAS_PWD}"
 ATLAS_HEADER="-X POST -H Content-Type:application/json -H Accept:application/json -H Cache-Control:no-cache"
 
 # typedef
-$(${ATLAS} \
+SERVER_GUID=$(${ATLAS} \
   -H 'Content-Type:application/json' \
   -H 'Accept:application/json' ${ATLAS_ENDPOINT}/entity/bulk -d '
   {
@@ -80,5 +81,6 @@ $(${ATLAS} \
       ]
     }
   ]
-}
-')
+  }' | jq --raw-output '.guidAssignments[]')
+
+echo "$SERVER_GUID"

@@ -1,14 +1,15 @@
-{ "classificationDefs": [
+{
+  "classificationDefs": [
     {
       "category": "CLASSIFICATION",
-      "name": "secure",
+      "name": "sftp",
       "typeVersion": "1.0",
       "attributeDefs": [],
       "superTypes": []
     },
     {
       "category": "CLASSIFICATION",
-      "name": "ftp",
+      "name": "etl_load",
       "typeVersion": "1.0",
       "attributeDefs": [],
       "superTypes": []
@@ -21,44 +22,46 @@
       "superTypes": []
     }
   ],
-  "entityDefs" : [
+  "entityDefs": [
     {
-      "superTypes" : [ "Process" ],
-      "category" : "ENTITY",
+      "superTypes": [
+        "Process"
+      ],
+      "category": "ENTITY",
       "serviceType": "3party",
-      "name" : "transfer",
-      "description" : "a type definition for data transfer",
-      "typeVersion" : "1.0",
-      "attributeDefs" : [
+      "name": "transfer",
+      "description": "a type definition for data transfer",
+      "typeVersion": "1.0",
+      "attributeDefs": [
         {
-          "name" : "orig_server",
-          "typeName" : "server",
-          "isOptional" : true,
-          "cardinality" : "SINGLE",
-          "valuesMinCount" : 1,
-          "valuesMaxCount" : 1,
-          "isUnique" : false,
-          "isIndexable" : false
-        }
-      ,{
-          "name" : "target_server",
-          "typeName" : "server",
-          "isOptional" : false,
-          "cardinality" : "SINGLE",
-          "valuesMinCount" : 1,
-          "valuesMaxCount" : 1,
-          "isUnique" : false,
-          "isIndexable" : true
-        }
-      ,{
-          "name" : "run_user",
-          "typeName" : "string",
-          "isOptional" : false,
-          "cardinality" : "SINGLE",
-          "valuesMinCount" : 1,
-          "valuesMaxCount" : 1,
-          "isUnique" : true,
-          "isIndexable" : true
+          "name": "orig_server",
+          "typeName": "server",
+          "isOptional": true,
+          "cardinality": "SINGLE",
+          "valuesMinCount": 1,
+          "valuesMaxCount": 1,
+          "isUnique": false,
+          "isIndexable": false
+        },
+        {
+          "name": "target_server",
+          "typeName": "server",
+          "isOptional": false,
+          "cardinality": "SINGLE",
+          "valuesMinCount": 1,
+          "valuesMaxCount": 1,
+          "isUnique": false,
+          "isIndexable": true
+        },
+        {
+          "name": "run_user",
+          "typeName": "string",
+          "isOptional": false,
+          "cardinality": "SINGLE",
+          "valuesMinCount": 1,
+          "valuesMaxCount": 1,
+          "isUnique": true,
+          "isIndexable": true
         }
       ]
     }

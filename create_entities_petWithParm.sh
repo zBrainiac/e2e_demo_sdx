@@ -17,7 +17,7 @@ while [ "$1" != "" ]; do
     shift
     CLASS="$1"
     ;;
-  -e| --eye_color)
+  -e | --eye_color)
     shift
     EYE_COLOR="$1"
     ;;
@@ -49,7 +49,7 @@ ATLAS="curl -u ${ATLAS_USER}:${ATLAS_PWD}"
 ATLAS_HEADER="-X POST -H Content-Type:application/json -H Accept:application/json -H Cache-Control:no-cache"
 
 # typedef
-$(${ATLAS} \
+PET_GUID=$(${ATLAS} \
   -H 'Content-Type:application/json' \
   -H 'Accept:application/json' ${ATLAS_ENDPOINT}/entity/bulk -d '
   {
@@ -66,5 +66,6 @@ $(${ATLAS} \
       ]
     }
   ]
-}
-')
+  }' | jq --raw-output '.guidAssignments[]')
+
+echo "$PET_GUID"
