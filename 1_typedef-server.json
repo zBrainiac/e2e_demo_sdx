@@ -1,0 +1,122 @@
+{
+  "classificationDefs": [
+    {
+      "category": "CLASSIFICATION",
+      "name": "landing_zone_incoming",
+      "description": "Used for classifying a server. Indicates that this server is a place where files from external source system will land into",
+      "typeVersion": "1.0",
+      "attributeDefs": [],
+      "superTypes": []
+    },
+    {
+      "category": "CLASSIFICATION",
+      "name": "edge_node",
+      "description": "Used for classifying a server. Indicates that this server is a edge node in the datalake cluster",
+      "typeVersion": "1.0",
+      "attributeDefs": [],
+      "superTypes": []
+    },
+    {
+      "category": "CLASSIFICATION",
+      "name": "worker_node",
+      "description": "Used for classifying a server. Indicates that this server is a worker node in the datalake cluster",
+      "typeVersion": "1.0",
+      "attributeDefs": [],
+      "superTypes": []
+    },
+    {
+      "category": "CLASSIFICATION",
+      "name": "streaming_node",
+      "description": "Used for classifying a server. Indicates that this server is a worker node in the datalake cluster",
+      "typeVersion": "1.0",
+      "attributeDefs": [],
+      "superTypes": []
+    },
+    {
+      "category": "CLASSIFICATION",
+      "name": "management_node",
+      "description": "Used for classifying a server. Indicates that this server is a management node in the datalake cluster",
+      "typeVersion": "1.0",
+      "attributeDefs": [],
+      "superTypes": []
+    },
+    {
+      "category": "CLASSIFICATION",
+      "name": "core_banking",
+      "description": "Used for classifying a server. Indicates that this server is a core banking node, based on z/OS",
+      "typeVersion": "1.0",
+      "attributeDefs": [],
+      "superTypes": []
+    },
+    {
+      "category": "CLASSIFICATION",
+      "name": "local_notebook",
+      "description": "Used for classifying a server. Indicates that this just a test entry",
+      "typeVersion": "1.0",
+      "attributeDefs": [],
+      "superTypes": []
+    }
+  ],
+  "entityDefs": [
+    {
+      "superTypes": ["Infrastructure"],
+      "serviceType": "3party",
+      "category": "ENTITY",
+      "name": "server",
+      "description": "a type definition for server machine",
+      "typeVersion": "1.0",
+      "attributeDefs": [
+        {
+          "name": "host_name",
+          "typeName": "string",
+          "isOptional": false,
+          "cardinality": "SINGLE",
+          "valuesMinCount": 1,
+          "valuesMaxCount": 1,
+          "isUnique": true,
+          "isIndexable": true
+        },
+        {
+          "name": "ip_address",
+          "typeName": "string",
+          "isOptional": false,
+          "cardinality": "SINGLE",
+          "valuesMinCount": 1,
+          "valuesMaxCount": 1,
+          "isUnique": true,
+          "isIndexable": true
+        },
+        {
+          "name": "zone",
+          "typeName": "string",
+          "isOptional": false,
+          "cardinality": "SINGLE",
+          "valuesMinCount": 1,
+          "valuesMaxCount": 1,
+          "isUnique": false,
+          "isIndexable": true
+        },
+        {
+          "name": "platform",
+          "typeName": "string",
+          "isOptional": false,
+          "cardinality": "SINGLE",
+          "valuesMinCount": 1,
+          "valuesMaxCount": 1,
+          "isUnique": false,
+          "isIndexable": true
+        },
+        {
+          "name": "rack_id",
+          "typeName": "string",
+          "isOptional": false,
+          "cardinality": "SINGLE",
+          "valuesMinCount": 1,
+          "valuesMaxCount": 1,
+          "isUnique": false,
+          "isIndexable": true
+        }
+      ]
+    }
+  ]
+}

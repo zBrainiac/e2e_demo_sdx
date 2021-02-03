@@ -1,0 +1,66 @@
+{
+  "classificationDefs": [
+    {
+      "category": "CLASSIFICATION",
+      "name": "cat",
+      "typeVersion": "1.0",
+      "attributeDefs": [],
+      "superTypes": []
+    },
+    {
+      "category": "CLASSIFICATION",
+      "name": "dog",
+      "typeVersion": "1.0",
+      "attributeDefs": [],
+      "superTypes": []
+    },
+    {
+      "category": "CLASSIFICATION",
+      "name": "bird",
+      "typeVersion": "1.0",
+      "attributeDefs": [],
+      "superTypes": []
+    }
+  ],
+  "entityDefs": [
+    {
+      "category": "ENTITY",
+      "serviceType": "fun",
+      "name": "pet",
+      "description": "definition for our pets",
+      "typeVersion": "1.0",
+      "attributeDefs": [
+        {
+          "name": "name",
+          "typeName": "string",
+          "isOptional": false,
+          "cardinality": "SINGLE",
+          "valuesMinCount": 1,
+          "valuesMaxCount": 1,
+          "isUnique": true,
+          "isIndexable": true
+        },
+        {
+          "name": "animal_species",
+          "typeName": "string",
+          "isOptional": false,
+          "cardinality": "SINGLE",
+          "valuesMinCount": 1,
+          "valuesMaxCount": 1,
+          "isUnique": false,
+          "isIndexable": true
+        },
+        {
+          "name": "eye_color",
+          "typeName": "string",
+          "isOptional": false,
+          "cardinality": "SINGLE",
+          "valuesMinCount": 1,
+          "valuesMaxCount": 1,
+          "isUnique": false,
+          "isIndexable": true
+        }
+      ]
+    }
+  ]
+}

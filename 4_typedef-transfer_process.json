@@ -1,0 +1,66 @@
+{ "classificationDefs": [
+    {
+      "category": "CLASSIFICATION",
+      "name": "secure",
+      "typeVersion": "1.0",
+      "attributeDefs": [],
+      "superTypes": []
+    },
+    {
+      "category": "CLASSIFICATION",
+      "name": "ftp",
+      "typeVersion": "1.0",
+      "attributeDefs": [],
+      "superTypes": []
+    },
+    {
+      "category": "CLASSIFICATION",
+      "name": "ssh",
+      "typeVersion": "1.0",
+      "attributeDefs": [],
+      "superTypes": []
+    }
+  ],
+  "entityDefs" : [
+    {
+      "superTypes" : [ "Process" ],
+      "category" : "ENTITY",
+      "serviceType": "3party",
+      "name" : "transfer",
+      "description" : "a type definition for data transfer",
+      "typeVersion" : "1.0",
+      "attributeDefs" : [
+        {
+          "name" : "orig_server",
+          "typeName" : "server",
+          "isOptional" : true,
+          "cardinality" : "SINGLE",
+          "valuesMinCount" : 1,
+          "valuesMaxCount" : 1,
+          "isUnique" : false,
+          "isIndexable" : false
+        }
+      ,{
+          "name" : "target_server",
+          "typeName" : "server",
+          "isOptional" : false,
+          "cardinality" : "SINGLE",
+          "valuesMinCount" : 1,
+          "valuesMaxCount" : 1,
+          "isUnique" : false,
+          "isIndexable" : true
+        }
+      ,{
+          "name" : "run_user",
+          "typeName" : "string",
+          "isOptional" : false,
+          "cardinality" : "SINGLE",
+          "valuesMinCount" : 1,
+          "valuesMaxCount" : 1,
+          "isUnique" : true,
+          "isIndexable" : true
+        }
+      ]
+    }
+  ]
+}
