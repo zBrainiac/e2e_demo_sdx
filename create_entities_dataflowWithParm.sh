@@ -1,47 +1,65 @@
 #!/bin/bash -x
 # Sample:
-# ./create_entities_dataflowWithParm.sh
+# ./create_entities_dataflowWithParm.sh -t etl_load -i raw_dataset -ig 862734ba-7c9c-436d-8858-5fdea68d498a -it dataset -o landing_ds -og e0945d8b-9013-42e0-b46f-c35f533eb274 -ot dataset -c etl_db_load
 
 # Default local IP
 SERVER_IP=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
 
+# lookup guid of this IP
+SERVER_GUID=$(./search_entities_serverWithIP.sh -ip "${SERVER_IP}")
+
 DATAFLOW_TYP="etl_load"
-INPUT_GUID="fbaf9a8b-7d66-48f9-b2b7-31dbb4c0cfc5"
+INPUT_NAME="dataset"
+INPUT_GUID="02e61ff3-70ab-433d-9129-d83f6f406fcb"
 INPUT_TYP="dataset"
-OUTPUT_GUID="bd3a6842-4140-429f-a3cd-04defa679eba"
+OUTPUT_NAME="abc_db_table"
+OUTPUT_GUID="9bd6da4d-cc67-4b62-b325-c28acf4136e0"
 OUTPUT_TYP="db_table"
+CLASS=
 
 USER=$USER
 
 usage() {
-  echo "usage: ATLAS create file script: [[-n 'xxx'] | [-ip 'xxx.xxx.xxx.xxx'] | [-d 'xxx/xxx/'] | [-f 'xxx'] | [-fq 'xxx'] | [-s 'xxx'] | [-h]]"
+  echo "usage: ATLAS create file script: [[-i 'xxx'] | [-ip 'xxx.xxx.xxx.xxx'] | [-ig 'xxx'] | [-it 'xxx'] | [-o 'xxx'] | [-og 'xxx'] | [-ot 'xxx'] | [-t 'xxx'] | [-h]]"
 }
 
 while [ "$1" != "" ]; do
   case $1 in
-  -n | --file_name)
+  -c | --classification)
     shift
-    FILE_NAME="$1"
+    CLASS="$1"
+    ;;
+  -i | --input_name)
+    shift
+    INPUT_NAME="$1"
+    ;;
+  -ig | --input_guid)
+    shift
+    INPUT_GUID="$1"
+    ;;
+  -it | --input_typ)
+    shift
+    INPUT_TYP="$1"
     ;;
   -ip | --ipadress)
     shift
     SERVER_IP="$1"
     ;;
-  -d | --file_directory)
+  -o | --output_name)
     shift
-    FILE_DIRECTORY="$1"
+    OUTPUT_NAME="$1"
     ;;
-  -f | --file_format)
+  -og | --output_guid)
     shift
-    FILE_FORMAT="$1"
+    OUTPUT_GUID="$1"
     ;;
-  -fq | --file_frequency)
+  -ot | --output_typ)
     shift
-    FILE_FREQENCY="$1"
+    OUTPUT_TYP="$1"
     ;;
-  -s | --file_source)
+  -t | --datafow_typ)
     shift
-    FILE_SOURCE="$1"
+    DATAFLOW_TYP="$1"
     ;;
   -h | --help)
     usage
@@ -54,9 +72,6 @@ while [ "$1" != "" ]; do
   esac
   shift
 done
-
-# lookup guid of this IP
-SERVER_GUID=$(./search_entities_serverWithIP.sh -ip "${SERVER_IP}")
 
 ATLAS_USER=admin
 ATLAS_PWD=admin
@@ -74,20 +89,19 @@ DATAFLOW_GUID=$(${ATLAS} \
       "typeName": "'"$DATAFLOW_TYP"'",
       "createdBy": "ingestors_news",
       "attributes": {
-        "qualifiedName": "news_from_reuters:to:news_topic",
-        "uri": "news_from_reuters:to:news_topic",
-        "name": "news_from_reuters:to:news_topic",
-        "description": "ingests '"$INPUT_TYP"' to '"$OUTPUT_TYP"' ",
+        "qualifiedName": "'"$INPUT_NAME"'-to-'"$OUTPUT_NAME"'",
+        "uri": "'"$INPUT_NAME"'-to-'"$OUTPUT_NAME"'",
+        "name": "'"$INPUT_NAME"'-to-'"$OUTPUT_NAME"'",
+        "description": "ingests '"$INPUT_TYP"' to '"$OUTPUT_TYP"'",
         "run_user":"'"$USER"'",
         "execution_server":{"guid": "'"$SERVER_GUID"'","typeName": "server"},
         "inputs": [{"guid": "'"$INPUT_GUID"'", "typeName": "'"$INPUT_TYP"'"}],
         "outputs": [{"guid": "'"$OUTPUT_GUID"'","typeName": "'"$OUTPUT_TYP"'"}]
       }
     }
-  ]
-},
+  ],
       "classifications": [
-        { "typeName": "'"$DATAFLOW_TYP"'" }
+        { "typeName": ["'"$CLASS"'", "'"$DATAFLOW_TYP"'"] }
       ]
     }
   ]

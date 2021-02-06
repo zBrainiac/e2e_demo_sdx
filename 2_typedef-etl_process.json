@@ -1,4 +1,34 @@
 {
+  "classificationDefs": [
+    {
+      "category": "CLASSIFICATION",
+      "name": "etl_db_load",
+      "typeVersion": "1.0",
+      "attributeDefs": [],
+      "superTypes": []
+    },
+    {
+      "category": "CLASSIFICATION",
+      "name": "etl_task",
+      "typeVersion": "1.0",
+      "attributeDefs": [],
+      "superTypes": []
+    },
+    {
+      "category": "CLASSIFICATION",
+      "name": "sftp",
+      "typeVersion": "1.0",
+      "attributeDefs": [],
+      "superTypes": []
+    },
+    {
+      "category": "CLASSIFICATION",
+      "name": "ssh",
+      "typeVersion": "1.0",
+      "attributeDefs": [],
+      "superTypes": []
+    }
+  ],
   "entityDefs": [
     {
       "superTypes": [

@@ -1,9 +1,11 @@
 #!/bin/bash -x
 # Sample:
-# ./create_entities_fileWithParm.sh -n marcel_2 -d /tmp/tep -f rec -fq weekly -s core-banking
+# ./create_entities_fileWithParm.sh -n marcel_2 -d /data/corebanking -f rec -fq weekly -s core-banking -g 513c062c-6830-4618-bf6d-550ab64175f8 -c systemOfRecord
 
 # Default local IP
 SERVER_IP=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
+# lookup guid of this IP
+SERVER_GUID=$(./search_entities_serverWithIP.sh -ip "${SERVER_IP}")
 
 FILE_NAME="foobar1"
 FILE_DIRECTORY="/tmp/data"
@@ -11,13 +13,18 @@ FILE_FORMAT="CSV"
 FILE_FREQENCY="daily"
 FILE_SOURCE="test"
 USER=$USER
+CLASS=
 
 usage() {
-  echo "usage: ATLAS create file script: [[-n 'xxx'] | [-ip 'xxx.xxx.xxx.xxx'] | [-d 'xxx/xxx/'] | [-f 'xxx'] | [-fq 'xxx'] | [-s 'xxx'] | [-h]]"
+  echo "usage: ATLAS create file script: [[-n 'xxx'] | [-ip 'xxx.xxx.xxx.xxx'] | [-d 'xxx/xxx/'] | [-f 'xxx'] | [-fq 'xxx'] | [-g 'xxx'] | [-s 'xxx'] | [-h]]"
 }
 
 while [ "$1" != "" ]; do
   case $1 in
+  -c | --classification)
+    shift
+    CLASS="$1"
+    ;;
   -n | --file_name)
     shift
     FILE_NAME="$1"
@@ -38,6 +45,10 @@ while [ "$1" != "" ]; do
     shift
     FILE_FREQENCY="$1"
     ;;
+  -g | --server_guid)
+    shift
+    SERVER_GUID="$1"
+    ;;
   -s | --file_source)
     shift
     FILE_SOURCE="$1"
@@ -54,8 +65,6 @@ while [ "$1" != "" ]; do
   shift
 done
 
-# lookup guid of this IP
-SERVER_GUID=$(./search_entities_serverWithIP.sh -ip "${SERVER_IP}")
 
 ATLAS_USER=admin
 ATLAS_PWD=admin
@@ -92,7 +101,7 @@ File_GUID=$(${ATLAS} \
         ]
       },
       "classifications": [
-        { "typeName": "systemOfRecord" }
+        { "typeName": "'"$CLASS"'" }
       ]
     }
   ]

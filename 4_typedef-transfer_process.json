@@ -9,13 +9,6 @@
     },
     {
       "category": "CLASSIFICATION",
-      "name": "etl_load",
-      "typeVersion": "1.0",
-      "attributeDefs": [],
-      "superTypes": []
-    },
-    {
-      "category": "CLASSIFICATION",
       "name": "ssh",
       "typeVersion": "1.0",
       "attributeDefs": [],
@@ -46,11 +39,11 @@
         {
           "name": "target_server",
           "typeName": "server",
-          "isOptional": false,
+          "isOptional": true,
           "cardinality": "SINGLE",
           "valuesMinCount": 1,
           "valuesMaxCount": 1,
-          "isUnique": false,
+          "isUnique": true,
           "isIndexable": true
         },
         {

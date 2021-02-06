@@ -50,6 +50,14 @@
     },
     {
       "category": "CLASSIFICATION",
+      "name": "db_server",
+      "description": "Used for classifying a server. Indicates that this server is a database node",
+      "typeVersion": "1.0",
+      "attributeDefs": [],
+      "superTypes": []
+    },
+    {
+      "category": "CLASSIFICATION",
       "name": "local_notebook",
       "description": "Used for classifying a server. Indicates that this just a test entry",
       "typeVersion": "1.0",
