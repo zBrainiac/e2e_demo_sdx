@@ -41,12 +41,11 @@ while [ "$1" != "" ]; do
   shift
 done
 
-ATLAS_USER=admin
-ATLAS_PWD=admin
+ATLAS_USER="admin"
+ATLAS_PWD="admin"
 ATLAS_ENDPOINT="http://localhost:21000/api/atlas/v2"
 
 ATLAS="curl -u ${ATLAS_USER}:${ATLAS_PWD}"
-ATLAS_HEADER="-X POST -H Content-Type:application/json -H Accept:application/json -H Cache-Control:no-cache"
 
 # typedef
 PET_GUID=$(${ATLAS} \

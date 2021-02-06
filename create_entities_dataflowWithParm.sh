@@ -7,16 +7,6 @@ SERVER_IP=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '(
 
 # lookup guid of this IP
 SERVER_GUID=$(./search_entities_serverWithIP.sh -ip "${SERVER_IP}")
-
-DATAFLOW_TYP="etl_load"
-INPUT_NAME="dataset"
-INPUT_GUID="02e61ff3-70ab-433d-9129-d83f6f406fcb"
-INPUT_TYP="dataset"
-OUTPUT_NAME="abc_db_table"
-OUTPUT_GUID="9bd6da4d-cc67-4b62-b325-c28acf4136e0"
-OUTPUT_TYP="db_table"
-CLASS=
-
 USER=$USER
 
 usage() {
@@ -73,12 +63,11 @@ while [ "$1" != "" ]; do
   shift
 done
 
-ATLAS_USER=admin
-ATLAS_PWD=admin
+ATLAS_USER="admin"
+ATLAS_PWD="admin"
 ATLAS_ENDPOINT="http://localhost:21000/api/atlas/v2"
 
 ATLAS="curl -u ${ATLAS_USER}:${ATLAS_PWD}"
-ATLAS_HEADER="-X POST -H Content-Type:application/json -H Accept:application/json -H Cache-Control:no-cache"
 
 # entity definition for "etl_load"
 DATAFLOW_GUID=$(${ATLAS} \
@@ -101,7 +90,7 @@ DATAFLOW_GUID=$(${ATLAS} \
     }
   ],
       "classifications": [
-        { "typeName": ["'"$CLASS"'", "'"$DATAFLOW_TYP"'"] }
+        { "typeName": ["'"$CLASS"'"] }
       ]
     }
   ]

@@ -13,20 +13,6 @@
       "typeVersion": "1.0",
       "attributeDefs": [],
       "superTypes": []
-    },
-    {
-      "category": "CLASSIFICATION",
-      "name": "sftp",
-      "typeVersion": "1.0",
-      "attributeDefs": [],
-      "superTypes": []
-    },
-    {
-      "category": "CLASSIFICATION",
-      "name": "ssh",
-      "typeVersion": "1.0",
-      "attributeDefs": [],
-      "superTypes": []
     }
   ],
   "entityDefs": [
