@@ -1,15 +1,9 @@
 #!/bin/bash -x
 # Sample:
-# ./create_entities_dbtableWithParm.sh -n abc_db_marcel_1 -d /tmp/tep -f rec -fq weekly -s core-banking
+# ./create_entities_dbtableWithParm.sh -a id3 -n abc_db_marcel_1 -d /tmp/tep -f rec -fq weekly -s core-banking
 
 # Default local IP
 SERVER_IP=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
-
-DB_TABLE_NAME="db_EXT_TABLE_foobar1"
-FILE_DIRECTORY="/tmp/data"
-FILE_FORMAT="CSV"
-FILE_FREQENCY="daily"
-FILE_SOURCE="test"
 USER=$USER
 
 usage() {
@@ -18,6 +12,14 @@ usage() {
 
 while [ "$1" != "" ]; do
   case $1 in
+  -a | --application_id)
+    shift
+    APPLICATION_ID="$1"
+    ;;
+  -c | --classification)
+    shift
+    CLASS="$1"
+    ;;
   -n | --DB_TABLE_NAME)
     shift
     DB_TABLE_NAME="$1"
@@ -37,6 +39,10 @@ while [ "$1" != "" ]; do
   -fq | --file_frequency)
     shift
     FILE_FREQENCY="$1"
+    ;;
+  -g | --server_guid)
+    shift
+    SERVER_GUID="$1"
     ;;
   -s | --file_source)
     shift
@@ -90,7 +96,7 @@ DB_TABLE_GUID=$(${ATLAS} \
         ]
       },
       "classifications": [
-        { "typeName": "systemOfRecord" }
+        { "typeName": "'"$APPLICATION_ID"'" }
       ]
     }
   ]

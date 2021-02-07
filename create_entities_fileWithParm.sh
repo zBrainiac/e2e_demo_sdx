@@ -1,27 +1,24 @@
 #!/bin/bash -x
 # Sample:
-# ./create_entities_fileWithParm.sh -n marcel_2 -d /data/corebanking -f rec -fq weekly -s core-banking -g 513c062c-6830-4618-bf6d-550ab64175f8 -c systemOfRecord
+# ./create_entities_fileWithParm.sh -a id3 -n marcel_2 -d /data/corebanking -f rec -fq weekly -s core-banking -g b3ba95e5-791e-421c-81a0-de1fc284ff09 -c systemOfRecord
 
 # Default local IP
 SERVER_IP=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
 # lookup guid of this IP
 SERVER_GUID=$(./search_entities_serverWithIP.sh -ip "${SERVER_IP}")
-
-FILE_NAME="foobar1"
-FILE_DIRECTORY="/tmp/data"
-FILE_FORMAT="CSV"
-FILE_FREQENCY="daily"
-FILE_SOURCE="test"
 USER=$USER
-CLASS=
 
 usage() {
-  echo "usage: ATLAS create file script: [[-n 'xxx'] | [-ip 'xxx.xxx.xxx.xxx'] | [-d 'xxx/xxx/'] | [-f 'xxx'] | [-fq 'xxx'] | [-g 'xxx'] | [-s 'xxx'] | [-h]]"
+  echo "usage: ATLAS create file script: [[-a 'xxx'] | [-n 'xxx'] | [-ip 'xxx.xxx.xxx.xxx'] | [-d 'xxx/xxx/'] | [-f 'xxx'] | [-fq 'xxx'] | [-g 'xxx'] | [-s 'xxx'] | [-h]]"
 }
 
 while [ "$1" != "" ]; do
   case $1 in
-  -c | --classification)
+  -a | --application_id)
+    shift
+    APPLICATION_ID="$1"
+    ;;
+    -c | --classification)
     shift
     CLASS="$1"
     ;;
@@ -65,6 +62,8 @@ while [ "$1" != "" ]; do
   shift
 done
 
+# lookup guid of this IP
+SERVER_GUID=$(./search_entities_serverWithIP.sh -ip "${SERVER_IP}")
 
 ATLAS_USER="admin"
 ATLAS_PWD="admin"
@@ -73,7 +72,7 @@ ATLAS_ENDPOINT="http://localhost:21000/api/atlas/v2"
 ATLAS="curl -u ${ATLAS_USER}:${ATLAS_PWD}"
 
 # typedef
-File_GUID=$(${ATLAS} \
+FILE_GUID=$(${ATLAS} \
   -H 'Content-Type:application/json' \
   -H 'Accept:application/json' ${ATLAS_ENDPOINT}/entity/bulk -d '
   {
@@ -100,10 +99,10 @@ File_GUID=$(${ATLAS} \
         ]
       },
       "classifications": [
-        { "typeName": "'"$CLASS"'" }
+        { "typeName": "'"$APPLICATION_ID"'" }
       ]
     }
   ]
   }' | jq --raw-output '.guidAssignments[]')
 
-echo "$File_GUID"
+echo "$FILE_GUID"

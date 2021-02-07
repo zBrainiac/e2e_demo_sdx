@@ -53,7 +53,7 @@
           "cardinality": "SINGLE",
           "valuesMinCount": 1,
           "valuesMaxCount": 1,
-          "isUnique": true,
+          "isUnique": false,
           "isIndexable": true
         }
       ]

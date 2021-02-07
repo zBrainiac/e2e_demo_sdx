@@ -2,11 +2,6 @@
 # Sample:
 # ./create_entities_petWithParm.sh -s Burmilla -n "The Tiger" -e Red -c cat
 
-ANIMAL_SPECIES="Birman"
-NAME="sweety"
-EYE_COLOR="blue"
-CLASS=
-
 usage() {
   echo "usage: ATLAS create server script: [[-s 'xxx'] | [-n'xxx'] | [-e 'xxx'] | [-help]]"
 }
