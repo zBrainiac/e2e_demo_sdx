@@ -2,38 +2,38 @@
 ./create_typedef.sh
 
 CLASS="systemOfRecord"
-APPLICATION_ID="XYZ"
-APPLICATION="loans"
+APPLICATION_ID="abc"
+APPLICATION="credit"
 ASSET="$APPLICATION_ID"-"$APPLICATION"
 
-SERVER_GUID_LANDING_ZONE=$(./create_entities_serverWithParm.sh \
+SERVER_GUID_LANDING_ZONE=$(./create_entities_server.sh \
  -h load-node-0 \
  -e prod \
  -c landing_zone_incoming)
 echo "$SERVER_GUID_LANDING_ZONE"
 
-SERVER_GUID_MAINFRAME=$(./create_entities_serverWithParm.sh \
+SERVER_GUID_MAINFRAME=$(./create_entities_server.sh \
  -ip 10.71.68.007 \
  -h mainframe \
  -e prod \
  -c core_banking)
 echo "$SERVER_GUID_MAINFRAME"
 
-SERVER_GUID_DB_NODE=$(./create_entities_serverWithParm.sh \
+SERVER_GUID_DB_NODE=$(./create_entities_server.sh \
  -ip 10.71.68.108 \
  -h db_max \
  -e prod \
  -c db_server)
 echo "$SERVER_GUID_DB_NODE"
 
-SERVER_GUID_STREAMING_NODE_0=$(./create_entities_serverWithParm.sh \
+SERVER_GUID_STREAMING_NODE_0=$(./create_entities_server.sh \
  -ip 10.71.68.120 \
  -h strimi \
  -e prod \
  -c streaming_node)
 echo "$SERVER_GUID_STREAMING_NODE_0"
 
-SERVER_GUID_STREAMING_NODE_1=$(./create_entities_serverWithParm.sh \
+SERVER_GUID_STREAMING_NODE_1=$(./create_entities_server.sh \
  -ip 10.71.68.121 \
  -h flinki \
  -e prod \
@@ -41,10 +41,12 @@ SERVER_GUID_STREAMING_NODE_1=$(./create_entities_serverWithParm.sh \
 echo "$SERVER_GUID_STREAMING_NODE_1"
 
 
-$(./create_classification.sh -a "$APPLICATION_ID")
+$(./create_classificationSuper.sh -a APPLICATION)
+$(./create_classification.sh -a "$APPLICATION_ID" -s APPLICATION)
 
 
-FILE_GUID_CORE_BANING=$(./create_entities_fileWithParm.sh \
+
+FILE_GUID_CORE_BANING=$(./create_entities_file.sh \
  -a "$APPLICATION_ID" \
  -n "$ASSET"_"corebanking" \
  -d /data/corebanking/"$APPLICATION_ID" \
@@ -56,10 +58,10 @@ FILE_GUID_CORE_BANING=$(./create_entities_fileWithParm.sh \
 echo "$FILE_GUID_CORE_BANING"
 
 
-FILE_GUID_LANDING_ZONE=$(./create_entities_fileWithParm.sh \
+FILE_GUID_LANDING_ZONE=$(./create_entities_file.sh \
  -a "$APPLICATION_ID" \
  -n "$ASSET"_"landing" \
- -d /incommingdata/corebanking/"$APPLICATION_ID" \
+ -d /incommingdata/"$APPLICATION_ID"_landing \
  -f rec \
  -fq daily \
  -s "$ASSET" \
@@ -68,10 +70,10 @@ FILE_GUID_LANDING_ZONE=$(./create_entities_fileWithParm.sh \
 echo "$FILE_GUID_LANDING_ZONE"
 
 
-FILE_GUID_LANDING_ZONE_ERROR=$(./create_entities_fileWithParm.sh \
+FILE_GUID_LANDING_ZONE_ERROR=$(./create_entities_file.sh \
  -a "$APPLICATION_ID" \
  -n "$ASSET"_"landing_error" \
- -d /incommingdata/corebanking/"$APPLICATION_ID" \
+ -d /incommingdata/"$APPLICATION_ID"_error \
  -f rec \
  -fq daily \
  -s "$ASSET"_"error" \
@@ -80,7 +82,7 @@ FILE_GUID_LANDING_ZONE_ERROR=$(./create_entities_fileWithParm.sh \
 echo "$FILE_GUID_LANDING_ZONE_ERROR"
 
 
-DB_TABLE_GUID=$(./create_entities_dbtableWithParm.sh \
+DB_TABLE_GUID=$(./create_entities_dbtable.sh \
  -a "$APPLICATION_ID" \
  -n "$ASSET"_"table" \
  -d /DB/"$APPLICATION_ID" \
@@ -91,7 +93,7 @@ echo "$DB_TABLE_GUID"
 
 
 # add file transfer "core banking" to "landing zone"
-FILE_MOVE_GUID=$(./create_entities_dataflowWithParm.sh \
+FILE_MOVE_GUID=$(./create_entities_dataflow.sh \
  -a "$APPLICATION_ID" \
  -t transfer \
  -ip 192.168.0.102 \
@@ -106,7 +108,7 @@ FILE_MOVE_GUID=$(./create_entities_dataflowWithParm.sh \
 echo "$FILE_MOVE_GUID"
 
 # add etl "landing zone" to "DB Table"
-FILE_LOAD_GUID=$(./create_entities_dataflowWithParm.sh \
+FILE_LOAD_GUID=$(./create_entities_dataflow.sh \
  -a "$APPLICATION_ID" \
  -t etl_load \
  -ip 192.168.0.102 \
@@ -121,7 +123,7 @@ FILE_LOAD_GUID=$(./create_entities_dataflowWithParm.sh \
 echo "$FILE_LOAD_GUID"
 
 # add etl "landing zone" to "error file"
-FILE_LOAD_GUID_ERROR=$(./create_entities_dataflowWithParm.sh \
+FILE_LOAD_GUID_ERROR=$(./create_entities_dataflow.sh \
  -a "$APPLICATION_ID" \
  -t etl_load \
  -ip 192.168.0.102 \

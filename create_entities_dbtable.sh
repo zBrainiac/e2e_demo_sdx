@@ -1,6 +1,6 @@
 #!/bin/bash -x
 # Sample:
-# ./create_entities_dbtableWithParm.sh -a id3 -n abc_db_marcel_1 -d /tmp/tep -f rec -fq weekly -s core-banking
+# ./create_entities_dbtable.sh -a id3 -n abc_db_marcel_1 -d /tmp/tep -f rec -fq weekly -s core-banking
 
 # Default local IP
 SERVER_IP=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
@@ -77,7 +77,7 @@ DB_TABLE_GUID=$(${ATLAS} \
   "entities": [
     {
       "typeName": "db_table",
-      "createdBy": "ingestors",
+      "createdBy": "ingestors_'"$APPLICATION_ID"'_'"$USER"'",
       "attributes": {
         "description": "External Db2 table: '"$DB_TABLE_NAME"' stored in '"$FILE_DIRECTORY"' format '"$FILE_FORMAT"'",
         "qualifiedName": "'"$FILE_DIRECTORY"'/'"$DB_TABLE_NAME"'.'"$FILE_FORMAT"'",

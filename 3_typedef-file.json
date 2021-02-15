@@ -75,9 +75,7 @@
   ],
   "entityDefs": [
     {
-      "superTypes": [
-        "DataSet"
-      ],
+      "superTypes": ["DataSet"],
       "serviceType": "3party",
       "category": "ENTITY",
       "name": "dataset",
@@ -126,7 +124,7 @@
         },
         {
           "name": "server",
-          "typeName": "server",
+          "typeName": "string",
           "isOptional": false,
           "cardinality": "SINGLE",
           "valuesMinCount": 1,

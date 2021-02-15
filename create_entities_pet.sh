@@ -1,6 +1,6 @@
 #!/bin/bash -x
 # Sample:
-# ./create_entities_petWithParm.sh -s Burmilla -n "The Tiger" -e Red -c cat
+# ./create_entities_pet.sh -s Burmilla -n "The Tiger" -e Red -c cat
 
 usage() {
   echo "usage: ATLAS create server script: [[-s 'xxx'] | [-n'xxx'] | [-e 'xxx'] | [-help]]"

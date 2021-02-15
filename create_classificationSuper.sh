@@ -1,7 +1,7 @@
 #!/bin/bash -x
 # ./create_classification.sh -a ABC
 usage() {
-  echo "usage: ATLAS create server script: [[-a 'xxx'] | [-s 'xxx'] | [-help]]"
+  echo "usage: ATLAS create server script: [[-a 'xxx'] | [-help]]"
 }
 
 while [ "$1" != "" ]; do
@@ -9,10 +9,6 @@ while [ "$1" != "" ]; do
   -a | --application_id)
     shift
     APPLICATION_ID="$1"
-    ;;
-  -s | --super_type_id)
-    shift
-    SUPER_TYPE_ID="$1"
     ;;
   --help)
     usage
@@ -42,7 +38,7 @@ $(${ATLAS}  \
       "name": "'"$APPLICATION_ID"'",
       "typeVersion": "1.0",
       "attributeDefs": [],
-      "superTypes": ["'"$SUPER_TYPE_ID"'"]
+      "superTypes": []
     }
   ]
   }

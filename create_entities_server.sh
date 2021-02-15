@@ -1,6 +1,6 @@
 #!/bin/bash -x
 # Sample:
-# ./create_entities_serverWithParm.sh -ip 10.71.68.007 -h 4711 -e prod -c edge_node -r 4711
+# ./create_entities_server.sh -ip 10.71.68.007 -h 4711 -e prod -c edge_node -r 4711
 
 # Default local IP
 SERVER_IP=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
@@ -62,6 +62,7 @@ SERVER_GUID=$(${ATLAS} \
   "entities": [
     {
       "typeName": "server",
+      "createdBy": "infrastructure_'"$USER"'",
       "attributes": {
         "description": "Server: '"$HOST_NAME"' a '"$CLASS"' in the '"$ENV"' environment",
         "owner": "'"$USER"'",

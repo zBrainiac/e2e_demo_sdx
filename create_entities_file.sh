@@ -1,6 +1,6 @@
 #!/bin/bash -x
 # Sample:
-# ./create_entities_fileWithParm.sh -a id3 -n marcel_2 -d /data/corebanking -f rec -fq weekly -s core-banking -g b3ba95e5-791e-421c-81a0-de1fc284ff09 -c systemOfRecord
+# ./create_entities_file.sh -a id3 -n marcel_2 -d /data/corebanking -f rec -fq weekly -s core-banking -g b3ba95e5-791e-421c-81a0-de1fc284ff09 -c systemOfRecord
 
 # Default local IP
 SERVER_IP=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
@@ -62,9 +62,6 @@ while [ "$1" != "" ]; do
   shift
 done
 
-# lookup guid of this IP
-SERVER_GUID=$(./search_entities_serverWithIP.sh -ip "${SERVER_IP}")
-
 ATLAS_USER="admin"
 ATLAS_PWD="admin"
 ATLAS_ENDPOINT="http://localhost:21000/api/atlas/v2"
@@ -79,9 +76,9 @@ FILE_GUID=$(${ATLAS} \
   "entities": [
     {
       "typeName": "dataset",
-      "createdBy": "ingestors",
+      "createdBy": "ingestors_'"$APPLICATION_ID"'_'"$USER"'",
       "attributes": {
-        "description": "Dataset: '"$FILE_NAME"'.'"$FILE_FORMAT"' is stored in '"$FILE_DIRECTORY"'",
+        "description": "Dataset '"$FILE_NAME"'.'"$FILE_FORMAT"' is stored in '"$FILE_DIRECTORY"'",
         "qualifiedName": "'"$FILE_DIRECTORY"'/'"$FILE_NAME"'.'"$FILE_FORMAT"'",
         "name": "'"$FILE_NAME"'",
         "file_directory": "'"$FILE_DIRECTORY"'",

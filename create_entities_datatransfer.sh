@@ -1,6 +1,6 @@
 #!/bin/bash -x
 # Sample:
-# ./create_entities_dataflowWithParm.sh -t etl_load -i raw_dataset -ig 862734ba-7c9c-436d-8858-5fdea68d498a -it dataset -o landing_ds -og e0945d8b-9013-42e0-b46f-c35f533eb274 -ot dataset -c etl_db_load
+# ./create_entities_datatransfer.sh -t transfer -i raw-ds -ig 4a11c7a0-18ae-4e1d-a4f9-ac80762b34f2 -o landing_ds -og 5cbdd0c7-3fa3-4a00-8b10-1782b758a536 -c sftp
 
 # Default local IP
 SERVER_IP=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
@@ -15,17 +15,9 @@ usage() {
 
 while [ "$1" != "" ]; do
   case $1 in
-    -a | --application_id)
-    shift
-    APPLICATION_ID="$1"
-    ;;
   -c | --classification)
     shift
     CLASS="$1"
-    ;;
-    -n | --name)
-    shift
-    NAME="$1"
     ;;
   -i | --input_name)
     shift
@@ -84,12 +76,15 @@ DATAFLOW_GUID=$(${ATLAS} \
   {"entities": [
     {
       "typeName": "'"$DATAFLOW_TYP"'",
-      "createdBy": "'"$APPLICATION_ID"'_ingestors_news",
+      "createdBy": "'"$DATAFLOW_TYP"'_'"$APPLICATION_ID"'_'"$USER"'",
       "attributes": {
         "qualifiedName": "'"$INPUT_NAME"'-to-'"$OUTPUT_NAME"'",
+        "uri": "'"$INPUT_NAME"'-to-'"$OUTPUT_NAME"'",
         "name": "'"$INPUT_NAME"'-to-'"$OUTPUT_NAME"'",
         "description": "ingests '"$INPUT_TYP"' to '"$OUTPUT_TYP"'",
-        "run_user":"'"$APPLICATION_ID"'-'"$USER"'",
+        "owner": "'"$USER"'",
+        "run_user":"'"$USER"'",
+        "target_server":"'"$TARGET_SERVER_GUID"'",
         "execution_server":{"guid": "'"$SERVER_GUID"'","typeName": "server"},
         "inputs": [{"guid": "'"$INPUT_GUID"'", "typeName": "'"$INPUT_TYP"'"}],
         "outputs": [{"guid": "'"$OUTPUT_GUID"'","typeName": "'"$OUTPUT_TYP"'"}]
@@ -97,10 +92,10 @@ DATAFLOW_GUID=$(${ATLAS} \
     }
   ],
       "classifications": [
-        { "typeName": ["'"$CLASS"'", "'"$APPLICATION_ID"'"] }
+        { "typeName": "'"$APPLICATION_ID"'" }
       ]
     }
   ]
-  }' | jq --raw-output '.guidAssignments[]')
+  }' | jq --raw-output '.')
 
 echo "$DATAFLOW_GUID"
