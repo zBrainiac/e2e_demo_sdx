@@ -1,5 +1,5 @@
 #!/bin/bash -x
-# ./create_classification.sh -a ABC
+# ./create_classificationSuper.sh -a APPLICATION
 usage() {
   echo "usage: ATLAS create server script: [[-a 'xxx'] | [-help]]"
 }

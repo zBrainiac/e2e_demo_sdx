@@ -2,8 +2,8 @@
 ./create_typedef.sh
 
 CLASS="systemOfRecord"
-APPLICATION_ID="abc"
-APPLICATION="credit"
+APPLICATION_ID="zyx"
+APPLICATION="loan"
 ASSET="$APPLICATION_ID"-"$APPLICATION"
 
 SERVER_GUID_LANDING_ZONE=$(./create_entities_server.sh \
@@ -91,6 +91,14 @@ DB_TABLE_GUID=$(./create_entities_dbtable.sh \
  -s "$ASSET")
 echo "$DB_TABLE_GUID"
 
+HIVE_TABLE_GUID=$(./create_entities_hivetable.sh \
+ -a "$APPLICATION_ID" \
+ -n "$ASSET"_"hive_table" \
+ -d /DB/"$APPLICATION_ID" \
+ -f rec \
+ -fq daily \
+ -s "$ASSET")
+echo "$HIVE_TABLE_GUID"
 
 # add file transfer "core banking" to "landing zone"
 FILE_MOVE_GUID=$(./create_entities_dataflow.sh \
@@ -103,12 +111,11 @@ FILE_MOVE_GUID=$(./create_entities_dataflow.sh \
  -o "$ASSET"_"landing_dataset"   \
  -ot dataset \
  -og "$FILE_GUID_LANDING_ZONE" \
- -c sftp
- )
+ -c sftp)
 echo "$FILE_MOVE_GUID"
 
 # add etl "landing zone" to "DB Table"
-FILE_LOAD_GUID=$(./create_entities_dataflow.sh \
+FILE_DBLOAD_GUID=$(./create_entities_dataflow.sh \
  -a "$APPLICATION_ID" \
  -t etl_load \
  -ip 192.168.0.102 \
@@ -120,7 +127,22 @@ FILE_LOAD_GUID=$(./create_entities_dataflow.sh \
  -ot db_table \
  -c etl_db_load
  )
-echo "$FILE_LOAD_GUID"
+echo "$FILE_DBLOAD_GUID"
+
+# add etl "landing zone" to "HIVE Table"
+FILE_HIVELOAD_GUID=$(./create_entities_dataflow.sh \
+ -a "$APPLICATION_ID" \
+ -t etl_load \
+ -ip 192.168.0.102 \
+ -i "$ASSET"_"landing_dataset" \
+ -it dataset \
+ -ig "$FILE_GUID_LANDING_ZONE" \
+ -o "$ASSET"_"hive_table"   \
+ -og "$HIVE_TABLE_GUID" \
+ -ot db_table \
+ -c etl_db_load
+ )
+echo "$FILE_HIVELOAD_GUID"
 
 # add etl "landing zone" to "error file"
 FILE_LOAD_GUID_ERROR=$(./create_entities_dataflow.sh \
