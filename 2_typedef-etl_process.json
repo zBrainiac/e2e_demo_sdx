@@ -39,7 +39,7 @@
         {
           "name": "execution_server",
           "typeName": "server",
-          "isOptional": false,
+          "isOptional": true,
           "cardinality": "SINGLE",
           "valuesMinCount": 1,
           "valuesMaxCount": 1,

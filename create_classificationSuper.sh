@@ -1,7 +1,7 @@
 #!/bin/bash -x
 # ./create_classificationSuper.sh -a APPLICATION
 usage() {
-  echo "usage: ATLAS create server script: [[-a 'xxx'] | [-help]]"
+  echo "usage: ATLAS create Application classification: [[-a 'xxx'] | [-help]]"
 }
 
 while [ "$1" != "" ]; do
