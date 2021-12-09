@@ -57,15 +57,15 @@ fs_path_GUID=$(${ATLAS} \
     {
       "typeName": "fs_path",
       "createdBy": "ingestors_'"$APPLICATION_ID"'_'"$USER"'",
+      "classifications": [{ "typeName": "'"$APPLICATION_ID"'" }],
       "attributes": {
         "name": "'"$APPLICATION_ID"'_'"$FILE_NAME"'",
         "description": "Dataset '"$FILE_NAME"'.'"$FILE_FORMAT"' is stored in '"$FILE_DIRECTORY"'",
         "qualifiedName": "'"$FILE_DIRECTORY"'/'"$FILE_NAME"'.'"$FILE_FORMAT"'",
-        "path": "'"$FILE_DIRECTORY"'"
-      }}],
-      "classifications": [
-        { "typeName": "'"$APPLICATION_ID"'" }
-      ]
+        "path": "'"$FILE_DIRECTORY"'",
+        "owner": "'"$USER"'",
+        "isFile": "true"
+      }}]
   }' | jq --raw-output '.guidAssignments[]')
 
 echo "$fs_path_GUID"

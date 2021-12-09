@@ -57,16 +57,15 @@ hdfs_path_GUID=$(${ATLAS} \
     {
       "typeName": "hdfs_path",
       "createdBy": "ingestors_'"$APPLICATION_ID"'_'"$USER"'",
+      "classifications": [{ "typeName": "'"$APPLICATION_ID"'" }],
       "attributes": {
         "name": "'"$APPLICATION_ID"'_'"$FILE_NAME"'",
         "description": "Dataset '"$FILE_NAME"'.'"$FILE_FORMAT"' is stored in '"$FILE_DIRECTORY"'",
         "qualifiedName": "'"$FILE_DIRECTORY"'/'"$FILE_NAME"'.'"$FILE_FORMAT"'",
         "path": "'"$FILE_DIRECTORY"'",
+        "owner": "'"$USER"'",
         "isFile": "true"
-      }}],
-      "classifications": [
-        { "typeName": "'"$APPLICATION_ID"'" }
-      ]
+      }}]
   }' | jq --raw-output '.guidAssignments[]')
 
 echo "$hdfs_path_GUID"

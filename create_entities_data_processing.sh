@@ -75,6 +75,7 @@ DATAFLOW_GUID=$(${ATLAS} \
     {
       "typeName": "'"$DATAFLOW_TYP"'",
       "createdBy": "'"$DATAFLOW_TYP"'_'"$APPLICATION_ID"'_'"$USER"'",
+      "classifications": [{ "typeName": "'"$APPLICATION_ID"'" }],
       "attributes": {
         "qualifiedName": "'"$INPUT_NAME"'-to-'"$OUTPUT_NAME"'",
         "name": "'"$INPUT_NAME"'-to-'"$OUTPUT_NAME"'",
@@ -85,12 +86,7 @@ DATAFLOW_GUID=$(${ATLAS} \
         "outputs": [{"guid": "'"$OUTPUT_GUID"'","typeName": "'"$OUTPUT_TYP"'"}]
       }
     }
-  ],
-      "classifications": [
-        { "typeName": "'"$APPLICATION_ID"'" }
-      ]
-    }
-  ]
+  ]}]
   }' | jq --raw-output '.guidAssignments[]')
 
 echo "$DATAFLOW_GUID"
