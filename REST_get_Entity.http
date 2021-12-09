@@ -1,0 +1,6 @@
+
+###
+GET http://localhost:21000/api/atlas/v2/search/basic?typeName=fs_path&query=abc_abc-FX_corebanking HTTP/1.1
+Authorization: Basic admin:admin
+
+###

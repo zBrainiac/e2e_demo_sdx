@@ -1,0 +1,46 @@
+
+@APPLICATION_ID=abc
+@APPLICATION=EQ-Trading
+@OWNER=T4711
+
+
+###
+POST http://localhost:21000/api/atlas/v2/entity/bulk HTTP/1.1
+content-type: application/json
+Authorization: Basic admin:admin
+
+{"entities": [
+    {
+      "typeName": "fs_path",
+      "createdBy": "ingestors_{{APPLICATION_ID}}_{{OWNER}}",
+      "classifications": [{ "typeName": "{{APPLICATION_ID}}" }],
+      "attributes": {
+        "name": "{{APPLICATION}}_corebanking",
+        "description": "Dataset {{APPLICATION_ID}}-{{APPLICATION}}_corebanking.csv is stored in hdfs:/data/corebanking/{{APPLICATION_ID}}",
+        "qualifiedName": "hdfs:/data/corebanking/{{APPLICATION_ID}}/{{APPLICATION_ID}}-{{APPLICATION}}_corebanking.csv@prod",
+        "path": "hdfs:/data/corebanking/{{APPLICATION_ID}}",
+        "owner": "{{OWNER}}",
+        "isFile": "true"
+      }}]
+ }
+
+###
+POST http://localhost:21000/api/atlas/v2/entity/bulk HTTP/1.1
+content-type: application/json
+Authorization: Basic admin:admin
+
+{"entities": [
+    {
+      "typeName": "hdfs_path",
+      "createdBy": "ingestors_{{APPLICATION_ID}}_{{OWNER}}",
+      "classifications": [{ "typeName": "{{APPLICATION_ID}}" }],
+      "attributes": {
+        "name": "{{APPLICATION}}_corebanking",
+        "description": "Dataset {{APPLICATION_ID}}-{{APPLICATION}}_corebanking.csv is stored in hdfs:/data/corebanking/{{APPLICATION_ID}}",
+        "qualifiedName": "hdfs:/data/corebanking/{{APPLICATION_ID}}/{{APPLICATION_ID}}-{{APPLICATION}}_corebanking.csv@prod",
+        "path": "hdfs:/data/corebanking/{{APPLICATION_ID}}",
+        "owner": "{{OWNER}}",
+        "isFile": "true"
+      }}]
+ }
+####
