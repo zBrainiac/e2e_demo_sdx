@@ -1,8 +1,78 @@
 
-@APPLICATION_ID=abc
+@APPLICATION_ID=DM1
 @APPLICATION=EQ-Trading
 @OWNER=T4711
+@BASE_URI={{BASE_URI}}
 
+
+
+### create classification super class "APPLICARION"
+POST http://localhost:21000/api/atlas/v2/types/typedefs HTTP/1.1
+content-type: application/json
+Authorization: Basic admin:admin
+
+{
+  "classificationDefs": [
+    {
+      "category": "CLASSIFICATION",
+      "name": "APPLICATION",
+      "typeVersion": "1.0",
+      "attributeDefs": [],
+      "superTypes": []
+    }
+  ]
+  }
+
+
+### create sub-class for a SWID in "APPLICATION"
+POST http://localhost:21000/api/atlas/v2/types/typedefs HTTP/1.1
+content-type: application/json
+Authorization: Basic admin:admin
+
+{
+  "classificationDefs": [
+    {
+      "category": "CLASSIFICATION",
+      "name": "{{APPLICATION_ID}}",
+      "typeVersion": "1.0",
+      "attributeDefs": [],
+      "superTypes": ["APPLICATION"]
+    }
+  ]
+  }
+
+
+
+###
+POST http://localhost:21000/api/atlas/v2/types/typedefs HTTP/1.1
+content-type: application/json
+Authorization: Basic admin:admin
+
+{
+  "classificationDefs": [
+    {
+      "category": "CLASSIFICATION",
+      "name": "LegalEntityContext",
+      "typeVersion": "1.0",
+      "attributeDefs": [],
+      "superTypes": []
+    },
+    {
+      "category": "CLASSIFICATION",
+      "name": "LCA_001",
+      "typeVersion": "1.0",
+      "attributeDefs": [],
+      "superTypes": ["LegalEntityContext"]
+    },
+    {
+      "category": "CLASSIFICATION",
+      "name": "LCA_019",
+      "typeVersion": "1.0",
+      "attributeDefs": [],
+      "superTypes": ["LegalEntityContext"]
+    }
+  ]
+  }
 
 ###
 POST http://localhost:21000/api/atlas/v2/entity/bulk HTTP/1.1
@@ -13,7 +83,7 @@ Authorization: Basic admin:admin
     {
       "typeName": "fs_path",
       "createdBy": "ingestors_{{APPLICATION_ID}}_{{OWNER}}",
-      "classifications": [{ "typeName": "{{APPLICATION_ID}}" }],
+      "classifications": [{ "typeName": "{{APPLICATION_ID}}" }, { "typeName": "LCA_019" }],
       "attributes": {
         "name": "{{APPLICATION}}_corebanking",
         "description": "Dataset {{APPLICATION_ID}}-{{APPLICATION}}_corebanking.csv is stored in hdfs:/data/corebanking/{{APPLICATION_ID}}",
@@ -23,6 +93,8 @@ Authorization: Basic admin:admin
         "isFile": "true"
       }}]
  }
+
+
 
 ###
 POST http://localhost:21000/api/atlas/v2/entity/bulk HTTP/1.1
@@ -33,9 +105,9 @@ Authorization: Basic admin:admin
     {
       "typeName": "hdfs_path",
       "createdBy": "ingestors_{{APPLICATION_ID}}_{{OWNER}}",
-      "classifications": [{ "typeName": "{{APPLICATION_ID}}" }],
+      "classifications": [{ "typeName": "{{APPLICATION_ID}}" }, { "typeName": "LCA_019" }],
       "attributes": {
-        "name": "{{APPLICATION}}_corebanking",
+        "name": "{{APPLICATION}}_corebanking1",
         "description": "Dataset {{APPLICATION_ID}}-{{APPLICATION}}_corebanking.csv is stored in hdfs:/data/corebanking/{{APPLICATION_ID}}",
         "qualifiedName": "hdfs:/data/corebanking/{{APPLICATION_ID}}/{{APPLICATION_ID}}-{{APPLICATION}}_corebanking.csv@prod",
         "path": "hdfs:/data/corebanking/{{APPLICATION_ID}}",
@@ -44,3 +116,88 @@ Authorization: Basic admin:admin
       }}]
  }
 ####
+POST http://localhost:21000/api/atlas/v2/types/typedefs HTTP/1.1
+content-type: application/json
+Authorization: Basic admin:admin
+
+{
+  "classificationDefs": [
+    {
+      "category": "CLASSIFICATION",
+      "name": "data_processing",
+      "typeVersion": "1.0",
+      "attributeDefs": [],
+      "superTypes": []
+    },
+    {
+      "category": "CLASSIFICATION",
+      "name": "etl_db_load",
+      "typeVersion": "1.0",
+      "attributeDefs": [],
+      "superTypes": ["data_processing"]
+    },
+    {
+      "category": "CLASSIFICATION",
+      "name": "etl_quality_assurance",
+      "typeVersion": "1.0",
+      "attributeDefs": [],
+      "superTypes": ["data_processing"]
+    },
+    {
+      "category": "CLASSIFICATION",
+      "name": "etl_copy",
+      "typeVersion": "1.0",
+      "attributeDefs": [],
+      "superTypes": ["data_processing"]
+    },
+    {
+      "category": "CLASSIFICATION",
+      "name": "etl_data_profiler",
+      "typeVersion": "1.0",
+      "attributeDefs": [],
+      "superTypes": ["data_processing"]
+    }
+  ],
+  "entityDefs": [
+    {
+      "superTypes": ["Process"],
+      "serviceType": "3party",
+      "category": "ENTITY",
+      "name": "data_process",
+      "description": "a type definition for etl load script",
+      "typeVersion": "1.0",
+      "attributeDefs": [
+        {
+          "name": "configuration_file",
+          "typeName": "string",
+          "isOptional": true,
+          "cardinality": "SINGLE",
+          "valuesMinCount": 1,
+          "valuesMaxCount": 1,
+          "isUnique": false,
+          "isIndexable": false
+        },
+        {
+          "name": "configuration_param",
+          "typeName": "string",
+          "isOptional": true,
+          "cardinality": "SINGLE",
+          "valuesMinCount": 1,
+          "valuesMaxCount": 1,
+          "isUnique": false,
+          "isIndexable": true
+        },
+        {
+          "name": "run_user",
+          "typeName": "string",
+          "isOptional": false,
+          "cardinality": "SINGLE",
+          "valuesMinCount": 1,
+          "valuesMaxCount": 1,
+          "isUnique": true,
+          "isIndexable": true
+        }
+      ]
+    }
+  ]
+}
