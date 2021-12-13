@@ -2,12 +2,12 @@
 @APPLICATION_ID=DM1
 @APPLICATION=EQ-Trading
 @OWNER=T4711
-@BASE_URI={{BASE_URI}}
+@BASE_URI=http://localhost:21000
 
 
 
-### create classification super class "APPLICARION"
-POST http://localhost:21000/api/atlas/v2/types/typedefs HTTP/1.1
+### create classification super class "Application"
+POST {{BASE_URI}}/api/atlas/v2/types/typedefs HTTP/1.1
 content-type: application/json
 Authorization: Basic admin:admin
 
@@ -15,7 +15,7 @@ Authorization: Basic admin:admin
   "classificationDefs": [
     {
       "category": "CLASSIFICATION",
-      "name": "APPLICATION",
+      "name": "Application",
       "typeVersion": "1.0",
       "attributeDefs": [],
       "superTypes": []
@@ -24,8 +24,8 @@ Authorization: Basic admin:admin
   }
 
 
-### create sub-class for a SWID in "APPLICATION"
-POST http://localhost:21000/api/atlas/v2/types/typedefs HTTP/1.1
+### create sub-class for a SWID in "Application"
+POST {{BASE_URI}}/api/atlas/v2/types/typedefs HTTP/1.1
 content-type: application/json
 Authorization: Basic admin:admin
 
@@ -36,15 +36,14 @@ Authorization: Basic admin:admin
       "name": "{{APPLICATION_ID}}",
       "typeVersion": "1.0",
       "attributeDefs": [],
-      "superTypes": ["APPLICATION"]
+      "superTypes": ["Application"]
     }
   ]
-  }
+}
 
 
-
-###
-POST http://localhost:21000/api/atlas/v2/types/typedefs HTTP/1.1
+### create classification super class "LegalEntityContext" and add in the same request also sub-class for the individual legal entities to it
+POST {{BASE_URI}}/api/atlas/v2/types/typedefs HTTP/1.1
 content-type: application/json
 Authorization: Basic admin:admin
 
@@ -72,10 +71,10 @@ Authorization: Basic admin:admin
       "superTypes": ["LegalEntityContext"]
     }
   ]
-  }
+}
 
-###
-POST http://localhost:21000/api/atlas/v2/entity/bulk HTTP/1.1
+### create entity for "File on NFS (fs_path)"
+POST {{BASE_URI}}/api/atlas/v2/entity/bulk HTTP/1.1
 content-type: application/json
 Authorization: Basic admin:admin
 
@@ -91,13 +90,14 @@ Authorization: Basic admin:admin
         "path": "hdfs:/data/corebanking/{{APPLICATION_ID}}",
         "owner": "{{OWNER}}",
         "isFile": "true"
-      }}]
+      }
+    }
+  ]
  }
 
 
-
-###
-POST http://localhost:21000/api/atlas/v2/entity/bulk HTTP/1.1
+### create entity for "File on HDFS (hdfs_path)"
+POST {{BASE_URI}}/api/atlas/v2/entity/bulk HTTP/1.1
 content-type: application/json
 Authorization: Basic admin:admin
 
@@ -113,10 +113,14 @@ Authorization: Basic admin:admin
         "path": "hdfs:/data/corebanking/{{APPLICATION_ID}}",
         "owner": "{{OWNER}}",
         "isFile": "true"
-      }}]
- }
-####
-POST http://localhost:21000/api/atlas/v2/types/typedefs HTTP/1.1
+      }
+    }
+  ]
+}
+
+
+### create classification super class "data_processing" and add in the same request also sub-class for the individual tasks to it
+POST {{BASE_URI}}/api/atlas/v2/types/typedefs HTTP/1.1
 content-type: application/json
 Authorization: Basic admin:admin
 
