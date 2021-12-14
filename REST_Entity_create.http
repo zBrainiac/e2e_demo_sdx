@@ -1,5 +1,6 @@
 
 @APPLICATION_ID=DM1
+@LCA=LCA_001
 @APPLICATION=EQ-Trading
 @OWNER=T4711
 @BASE_URI=http://localhost:21000
@@ -82,7 +83,8 @@ Authorization: Basic admin:admin
     {
       "typeName": "fs_path",
       "createdBy": "ingestors_{{APPLICATION_ID}}_{{OWNER}}",
-      "classifications": [{ "typeName": "{{APPLICATION_ID}}" }, { "typeName": "LCA_019" }],
+      "classifications": [{ "typeName": "{{APPLICATION_ID}}" }, { "typeName": "{{LCA}}" }],
+      "customAttributes": {"property1": "customAttributes1", "property2": "customAttributes2"},
       "attributes": {
         "name": "{{APPLICATION}}_corebanking",
         "description": "Dataset {{APPLICATION_ID}}-{{APPLICATION}}_corebanking.csv is stored in hdfs:/data/corebanking/{{APPLICATION_ID}}",
@@ -105,7 +107,8 @@ Authorization: Basic admin:admin
     {
       "typeName": "hdfs_path",
       "createdBy": "ingestors_{{APPLICATION_ID}}_{{OWNER}}",
-      "classifications": [{ "typeName": "{{APPLICATION_ID}}" }, { "typeName": "LCA_019" }],
+      "classifications": [{ "typeName": "{{APPLICATION_ID}}" }, {"typeName": "{{LCA}}" }],
+      "customAttributes": {"property1": "customAttributes1", "property2": "customAttributes2"},
       "attributes": {
         "name": "{{APPLICATION}}_corebanking1",
         "description": "Dataset {{APPLICATION_ID}}-{{APPLICATION}}_corebanking.csv is stored in hdfs:/data/corebanking/{{APPLICATION_ID}}",
