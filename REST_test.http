@@ -1,0 +1,25 @@
+@BASE_URI=http://localhost:21000
+
+### test
+POST {{BASE_URI}}/api/atlas/v2/entity/bulk HTTP/1.1
+content-type: application/json
+Authorization: Basic admin:admin
+
+{"entities": [
+    {
+      "typeName": "hdfs_path",
+      "labels": ["label_a","label_b"],
+      "createdBy": "test_owner",
+      "customAttributes": {"property1": "customAttributes1", "property2": "customAttributes2"},
+      "businessAttributes": {"dataquality": {"test": "51"}},
+      "attributes": {
+        "name": "test_corebanking4",
+        "description": "Dataset description",
+        "qualifiedName": "hdfs:/data/corebanking/abc_corebanking4.csv@prod",
+        "path": "hdfs:/data/corebanking/abc",
+        "owner": "test_owner",
+        "isFile": "true"
+      }
+    }
+  ]
+}

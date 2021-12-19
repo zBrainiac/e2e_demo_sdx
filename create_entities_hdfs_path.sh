@@ -58,6 +58,7 @@ hdfs_path_GUID=$(${ATLAS} \
       "typeName": "hdfs_path",
       "createdBy": "ingestors_'"$APPLICATION_ID"'_'"$USER"'",
       "classifications": [{ "typeName": "'"$APPLICATION_ID"'" }],
+      "labels": ["golden_data"],
       "attributes": {
         "name": "'"$APPLICATION_ID"'_'"$FILE_NAME"'",
         "description": "Dataset '"$FILE_NAME"'.'"$FILE_FORMAT"' is stored in '"$FILE_DIRECTORY"'",

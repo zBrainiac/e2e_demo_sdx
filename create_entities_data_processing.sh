@@ -76,6 +76,7 @@ DATAFLOW_GUID=$(${ATLAS} \
       "typeName": "'"$DATAFLOW_TYP"'",
       "createdBy": "'"$DATAFLOW_TYP"'_'"$APPLICATION_ID"'_'"$USER"'",
       "classifications": [{ "typeName": "'"$APPLICATION_ID"'" }],
+      "labels": ["quality_gate"],
       "attributes": {
         "qualifiedName": "'"$INPUT_NAME"'-to-'"$OUTPUT_NAME"'",
         "name": "'"$INPUT_NAME"'-to-'"$OUTPUT_NAME"'",

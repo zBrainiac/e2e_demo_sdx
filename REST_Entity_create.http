@@ -85,6 +85,7 @@ Authorization: Basic admin:admin
       "createdBy": "ingestors_{{APPLICATION_ID}}_{{OWNER}}",
       "classifications": [{ "typeName": "{{APPLICATION_ID}}" }, { "typeName": "{{LCA}}" }],
       "customAttributes": {"property1": "customAttributes1", "property2": "customAttributes2"},
+      "labels": ["raw_data"],
       "attributes": {
         "name": "{{APPLICATION}}_corebanking",
         "description": "Dataset {{APPLICATION_ID}}-{{APPLICATION}}_corebanking.csv is stored in hdfs:/data/corebanking/{{APPLICATION_ID}}",
@@ -109,6 +110,7 @@ Authorization: Basic admin:admin
       "createdBy": "ingestors_{{APPLICATION_ID}}_{{OWNER}}",
       "classifications": [{ "typeName": "{{APPLICATION_ID}}" }, {"typeName": "{{LCA}}" }],
       "customAttributes": {"property1": "customAttributes1", "property2": "customAttributes2"},
+      "labels": ["golden_data"],
       "attributes": {
         "name": "{{APPLICATION}}_corebanking1",
         "description": "Dataset {{APPLICATION_ID}}-{{APPLICATION}}_corebanking.csv is stored in hdfs:/data/corebanking/{{APPLICATION_ID}}",
