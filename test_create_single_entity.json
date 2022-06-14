@@ -1,0 +1,238 @@
+{
+    "entity" : {
+      "businessAttributes" : {
+        "property1" : { },
+        "property2" : { }
+      },
+      "classifications" : [ {
+        "entityGuid" : "...",
+        "entityStatus" : "PURGED",
+        "propagate" : true,
+        "removePropagationsOnEntityDelete" : true,
+        "validityPeriods" : [ { }, { } ],
+        "attributes" : {
+          "property1" : { },
+          "property2" : { }
+        },
+        "typeName" : "..."
+      }, {
+        "entityGuid" : "...",
+        "entityStatus" : "PURGED",
+        "propagate" : true,
+        "removePropagationsOnEntityDelete" : true,
+        "validityPeriods" : [ { }, { } ],
+        "attributes" : {
+          "property1" : { },
+          "property2" : { }
+        },
+        "typeName" : "..."
+      } ],
+      "createTime" : 12345,
+      "createdBy" : "...",
+      "customAttributes" : {
+        "property1" : "...",
+        "property2" : "..."
+      },
+      "guid" : "...",
+      "homeId" : "...",
+      "isIncomplete" : true,
+      "labels" : [ "...", "..." ],
+      "meanings" : [ {
+        "confidence" : 12345,
+        "createdBy" : "...",
+        "description" : "...",
+        "displayText" : "...",
+        "expression" : "...",
+        "relationGuid" : "...",
+        "source" : "...",
+        "status" : "VALIDATED",
+        "steward" : "...",
+        "termGuid" : "..."
+      }, {
+        "confidence" : 12345,
+        "createdBy" : "...",
+        "description" : "...",
+        "displayText" : "...",
+        "expression" : "...",
+        "relationGuid" : "...",
+        "source" : "...",
+        "status" : "IMPORTED",
+        "steward" : "...",
+        "termGuid" : "..."
+      } ],
+      "pendingTasks" : [ "...", "..." ],
+      "provenanceType" : 12345,
+      "proxy" : true,
+      "relationshipAttributes" : {
+        "property1" : { },
+        "property2" : { }
+      },
+      "status" : "ACTIVE",
+      "updateTime" : 12345,
+      "updatedBy" : "...",
+      "version" : 12345,
+      "attributes" : {
+        "property1" : { },
+        "property2" : { }
+      },
+      "typeName" : "..."
+    },
+    "referredEntities" : {
+      "property1" : {
+        "businessAttributes" : {
+          "property1" : { },
+          "property2" : { }
+        },
+        "classifications" : [ {
+          "entityGuid" : "...",
+          "entityStatus" : "ACTIVE",
+          "propagate" : true,
+          "removePropagationsOnEntityDelete" : true,
+          "validityPeriods" : [ { }, { } ],
+          "attributes" : {
+            "property1" : { },
+            "property2" : { }
+          },
+          "typeName" : "..."
+        }, {
+          "entityGuid" : "...",
+          "entityStatus" : "PURGED",
+          "propagate" : true,
+          "removePropagationsOnEntityDelete" : true,
+          "validityPeriods" : [ { }, { } ],
+          "attributes" : {
+            "property1" : { },
+            "property2" : { }
+          },
+          "typeName" : "..."
+        } ],
+        "createTime" : 12345,
+        "createdBy" : "...",
+        "customAttributes" : {
+          "property1" : "...",
+          "property2" : "..."
+        },
+        "guid" : "...",
+        "homeId" : "...",
+        "isIncomplete" : true,
+        "labels" : [ "...", "..." ],
+        "meanings" : [ {
+          "confidence" : 12345,
+          "createdBy" : "...",
+          "description" : "...",
+          "displayText" : "...",
+          "expression" : "...",
+          "relationGuid" : "...",
+          "source" : "...",
+          "status" : "DISCOVERED",
+          "steward" : "...",
+          "termGuid" : "..."
+        }, {
+          "confidence" : 12345,
+          "createdBy" : "...",
+          "description" : "...",
+          "displayText" : "...",
+          "expression" : "...",
+          "relationGuid" : "...",
+          "source" : "...",
+          "status" : "VALIDATED",
+          "steward" : "...",
+          "termGuid" : "..."
+        } ],
+        "pendingTasks" : [ "...", "..." ],
+        "provenanceType" : 12345,
+        "proxy" : true,
+        "relationshipAttributes" : {
+          "property1" : { },
+          "property2" : { }
+        },
+        "status" : "DELETED",
+        "updateTime" : 12345,
+        "updatedBy" : "...",
+        "version" : 12345,
+        "attributes" : {
+          "property1" : { },
+          "property2" : { }
+        },
+        "typeName" : "..."
+      },
+      "property2" : {
+        "businessAttributes" : {
+          "property1" : { },
+          "property2" : { }
+        },
+        "classifications" : [ {
+          "entityGuid" : "...",
+          "entityStatus" : "ACTIVE",
+          "propagate" : true,
+          "removePropagationsOnEntityDelete" : true,
+          "validityPeriods" : [ { }, { } ],
+          "attributes" : {
+            "property1" : { },
+            "property2" : { }
+          },
+          "typeName" : "..."
+        }, {
+          "entityGuid" : "...",
+          "entityStatus" : "PURGED",
+          "propagate" : true,
+          "removePropagationsOnEntityDelete" : true,
+          "validityPeriods" : [ { }, { } ],
+          "attributes" : {
+            "property1" : { },
+            "property2" : { }
+          },
+          "typeName" : "..."
+        } ],
+        "createTime" : 12345,
+        "createdBy" : "...",
+        "customAttributes" : {
+          "property1" : "...",
+          "property2" : "..."
+        },
+        "guid" : "...",
+        "homeId" : "...",
+        "isIncomplete" : true,
+        "labels" : [ "...", "..." ],
+        "meanings" : [ {
+          "confidence" : 12345,
+          "createdBy" : "...",
+          "description" : "...",
+          "displayText" : "...",
+          "expression" : "...",
+          "relationGuid" : "...",
+          "source" : "...",
+          "status" : "DEPRECATED",
+          "steward" : "...",
+          "termGuid" : "..."
+        }, {
+          "confidence" : 12345,
+          "createdBy" : "...",
+          "description" : "...",
+          "displayText" : "...",
+          "expression" : "...",
+          "relationGuid" : "...",
+          "source" : "...",
+          "status" : "OBSOLETE",
+          "steward" : "...",
+          "termGuid" : "..."
+        } ],
+        "pendingTasks" : [ "...", "..." ],
+        "provenanceType" : 12345,
+        "proxy" : true,
+        "relationshipAttributes" : {
+          "property1" : { },
+          "property2" : { }
+        },
+        "status" : "PURGED",
+        "updateTime" : 12345,
+        "updatedBy" : "...",
+        "version" : 12345,
+        "attributes" : {
+          "property1" : { },
+          "property2" : { }
+        },
+        "typeName" : "..."
+      }
+    }
+  }

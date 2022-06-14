@@ -1,0 +1,124 @@
+@BASE_URI=http://localhost:21000
+@APPLICATION_ID=ABC
+@APPLICATION=EQ-Trading
+@OWNER=T4711
+
+@LCA=LCA_001
+
+
+### create entity for "database instance"
+POST {{BASE_URI}}/api/atlas/v2/entity HTTP/1.1
+content-type: application/json
+Authorization: Basic admin:admin
+
+{"entity":
+    {
+      "typeName": "rdbms_instance",
+      "labels": ["raw_data"],
+      "attributes": {
+          "name": "test_rdbms_instance",
+          "rdbms_type": "Db2",
+          "qualifiedName": "test_rdbms_instance",
+          "cloudOrOnPrem": "OnPrem",
+          "platform": "AIX"
+      }
+    }
+ }
+
+
+
+### create entity for "database"
+POST {{BASE_URI}}/api/atlas/v2/entity HTTP/1.1
+content-type: application/json
+Authorization: Basic admin:admin
+
+{"entity":
+    {
+      "typeName": "rdbms_db",
+      "attributes": {
+          "name": "test_rdbms_db",
+          "instance": {
+                "guid": "46a2d6c1-734e-4118-85cc-97eefe07d522",
+                "typeName": "rdbms_instance"
+            },
+          "qualifiedName": "test_rdbms_db",
+          "type": "table",
+          "prodOrOther":"test"
+      }
+    }
+ }
+
+
+
+### create entity for "database table (rdbms_table)"
+POST {{BASE_URI}}/api/atlas/v2/entity HTTP/1.1
+content-type: application/json
+Authorization: Basic admin:admin
+
+{
+   "entity":{
+      "typeName":"rdbms_table",
+      "attributes":{
+         "db":{
+            "endDef1":{
+               "cardinality":"SINGLE",
+               "description":"...",
+               "isContainer":true,
+               "isLegacyAttribute":true,
+               "name":"...",
+               "type":"..."
+            },
+            "endDef2":{
+               "cardinality":"LIST",
+               "description":"...",
+               "isContainer":true,
+               "isLegacyAttribute":true,
+               "name":"...",
+               "type":"..."
+            },
+            "guid":"11ec8e83-44ee-4c8d-8f68-fd31b1634480",
+            "name": "relation_to_DB"
+         },
+         "name":"{{APPLICATION}}_corebanking1",
+         "type":"table",
+         "qualifiedName":"test_rdbms_table"
+      }
+   }
+}
+
+
+### create entity for "database table (rdbms_table)"
+POST {{BASE_URI}}/api/atlas/v2/entity HTTP/1.1
+content-type: application/json
+Authorization: Basic admin:admin
+
+{
+   "entity":{
+      "typeName":"rdbms_table",
+      "customAttributes": {"swid": "4711"},
+      "labels": ["raw_data"],
+      "attributes":{
+         "db":{
+            "endDef1":{
+               "cardinality":"SINGLE",
+               "isContainer":true,
+               "isLegacyAttribute":true
+            },
+            "endDef2":{
+               "cardinality":"SINGLE",
+               "isContainer":true,
+               "isLegacyAttribute":true
+            },
+            "guid":"11ec8e83-44ee-4c8d-8f68-fd31b1634480",
+            "name": "relation_to_DB"
+         },
+         "name":"{{APPLICATION}}_corebanking1_view_1",
+         "type":"view",
+         "qualifiedName":"test_rdbms_view_1",
+         "replicatedFrom": [{
+                "guid": "c2c4e76b-4336-4ad8-8e11-5de6853b4f6e",
+                "typeName": "rdbms_table"
+            }]
+      }
+   }
+}

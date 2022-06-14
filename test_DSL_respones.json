@@ -1,0 +1,117 @@
+{
+   "queryType":"DSL",
+   "queryText":"`dataset` ",
+   "entities":[
+      {
+         "typeName":"dataset",
+         "attributes":{
+            "owner":"marcel",
+            "qualifiedName":"/incommingdata/ABC_landing/ABC-GELD_landing.rec",
+            "name":"ABC-GELD_landing",
+            "description":"Dataset ABC-GELD_landing.rec is stored in /incommingdata/ABC_landing"
+         },
+         "guid":"50968c97-ab89-47e2-aa20-4ceaecf2b1d3",
+         "status":"ACTIVE",
+         "displayText":"ABC-GELD_landing",
+         "classificationNames":[
+            "ABC",
+            "ABC"
+         ],
+         "classifications":[
+            {
+               "typeName":"ABC",
+               "entityGuid":"50968c97-ab89-47e2-aa20-4ceaecf2b1d3",
+               "entityStatus":"ACTIVE",
+               "propagate":true,
+               "removePropagationsOnEntityDelete":false
+            },
+            {
+               "typeName":"ABC",
+               "entityGuid":"dd2cfdf1-3b03-486f-8f34-07487143a551",
+               "entityStatus":"ACTIVE",
+               "propagate":true,
+               "removePropagationsOnEntityDelete":false
+            }
+         ],
+         "meaningNames":[
+            
+         ],
+         "meanings":[
+            
+         ],
+         "isIncomplete":false,
+         "labels":[
+            
+         ]
+      },
+      {
+         "typeName":"dataset",
+         "attributes":{
+            "owner":"marcel",
+            "qualifiedName":"/incommingdata/ABC_error/ABC-GELD_landing_error.rec",
+            "name":"ABC-GELD_landing_error",
+            "description":"Dataset ABC-GELD_landing_error.rec is stored in /incommingdata/ABC_error"
+         },
+         "guid":"81a73c83-d991-4feb-b268-d907a210fdf7",
+         "status":"ACTIVE",
+         "displayText":"ABC-GELD_landing_error",
+         "classificationNames":[
+            "ABC"
+         ],
+         "classifications":[
+            {
+               "typeName":"ABC",
+               "entityGuid":"81a73c83-d991-4feb-b268-d907a210fdf7",
+               "entityStatus":"ACTIVE",
+               "propagate":true,
+               "removePropagationsOnEntityDelete":false
+            }
+         ],
+         "meaningNames":[
+            
+         ],
+         "meanings":[
+            
+         ],
+         "isIncomplete":false,
+         "labels":[
+            
+         ]
+      },
+      {
+         "typeName":"dataset",
+         "attributes":{
+            "owner":"marcel",
+            "qualifiedName":"/data/corebanking/ABC/ABC-GELD_corebanking.rec",
+            "name":"ABC-GELD_corebanking",
+            "description":"Dataset ABC-GELD_corebanking.rec is stored in /data/corebanking/ABC"
+         },
+         "guid":"dd2cfdf1-3b03-486f-8f34-07487143a551",
+         "status":"ACTIVE",
+         "displayText":"ABC-GELD_corebanking",
+         "classificationNames":[
+            "ABC"
+         ],
+         "classifications":[
+            {
+               "typeName":"ABC",
+               "entityGuid":"dd2cfdf1-3b03-486f-8f34-07487143a551",
+               "entityStatus":"ACTIVE",
+               "propagate":true,
+               "removePropagationsOnEntityDelete":false
+            }
+         ],
+         "meaningNames":[
+            
+         ],
+         "meanings":[
+            
+         ],
+         "isIncomplete":false,
+         "labels":[
+            
+         ]
+      }
+   ],
+   "approximateCount":-1
+}
